@@ -1,0 +1,6 @@
+pygsheets
+pandas
+dotenv
+requests
+fastapi[all]
+flask
