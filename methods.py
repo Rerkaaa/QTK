@@ -8,7 +8,7 @@ import re
 
 load_dotenv()
 
-api_key = "RGAPI-a76bbb3e-4659-4021-b035-f0845041d3ed"
+api_key = os.getenv('RIOT_API')
 
 service_account = pygsheets.authorize(service_file='JSONS\\spreadsheet-automator-475823-5c8c84bc15e3.json')
 
