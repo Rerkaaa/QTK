@@ -274,7 +274,7 @@ label,
     width: 80%;
     transform: translateX(-50%);
     text-align: center;
-    
+
 }
 
 .back .opgg-btn {
@@ -417,10 +417,13 @@ label,
 }
 
 .staff-grid .team-card[data-url]:hover {
-    background: #232c3a; /* gentle bluish tint */
+    background: #232c3a;
+    /* gentle bluish tint */
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 4px 14px rgba(114, 137, 218, 0.25); /* softer glow */
-    border-color: rgba(114, 137, 218, 0.4); /* light blue outline */
+    box-shadow: 0 4px 14px rgba(114, 137, 218, 0.25);
+    /* softer glow */
+    border-color: rgba(114, 137, 218, 0.4);
+    /* light blue outline */
 }
 
 /* Text soft glow */
@@ -495,44 +498,65 @@ footer {
     }
 }
 
-/* ===== MOBILE + RESPONSIVE FLIP FIX ===== */
+
+/* ===== MOBILE + RESPONSIVE FLIP FIX (WITH FLIP ANIMATION KEPT) ===== */
 @media (max-width: 768px) {
     .team-card {
         width: 90%;
-        height: auto; /* allow content height to grow naturally */
-        aspect-ratio: auto;
+        height: 500px;
+        /* fixed enough for flip, not too tall */
     }
 
     .card-content {
-        height: auto;
-        min-height: 460px; /* ensures a baseline height */
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.8s ease-in-out;
+    }
+
+    /* ✅ Keep the flip rotation */
+    .team-card input.flip-toggle:checked~.card-content {
+        transform: rotateY(180deg);
     }
 
     .front,
     .back {
-        position: relative;
-        transform: none;
-        backface-visibility: visible;
-        height: auto;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        backface-visibility: hidden;
+        overflow: hidden;
         padding: 1rem;
     }
 
-    /* Disable the 3D flip for small screens */
-    .team-card input.flip-toggle:checked ~ .card-content {
-        transform: none;
+    .front {
+        background-color: #1f272f;
+        transform: rotateY(0deg);
     }
 
-    /* Make champ list scrollable instead of overflowing */
-    .back .champ-grid {
-        max-height: 200px;
+    .back {
+        background-color: #1e2e3d;
+        transform: rotateY(180deg);
         overflow-y: auto;
+        /* allow scrolling if needed */
         scrollbar-width: thin;
     }
 
-    /* Move buttons neatly below */
+    /* Adjust content inside for smaller screens */
+    .front img.profile-img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .back .champ-grid {
+        max-height: 180px;
+        overflow-y: auto;
+    }
+
     .back .actions {
-        position: static;
-        margin-top: 1rem;
+        position: absolute;
+        bottom: 1rem;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -542,10 +566,6 @@ footer {
 
     .back .opgg-btn,
     .back .return-btn {
-        position: static;
-        transform: none;
         width: auto;
     }
 }
-
-
