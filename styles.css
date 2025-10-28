@@ -22,6 +22,11 @@ body {
     z-index: 100;
 }
 
+.navbar.scrolled {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+
 .nav-container {
     max-width: 1700px;
     margin: 0 auto;
@@ -70,6 +75,19 @@ body {
 .hero h1 {
     font-size: 2.5rem;
     color: #7289da;
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        text-shadow: 0 0 8px rgba(114, 137, 218, 0.4);
+    }
+
+    50% {
+        text-shadow: 0 0 18px rgba(114, 137, 218, 0.8);
+    }
 }
 
 .hero p {
@@ -229,6 +247,11 @@ body {
     color: #0f1419;
 }
 
+.flip-btn:hover {
+    box-shadow: 0 0 12px rgba(114, 137, 218, 0.6);
+    transform: scale(1.05);
+}
+
 a,
 button,
 label,
@@ -373,6 +396,12 @@ label,
     object-fit: cover;
 }
 
+.champ-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.03);
+    transition: 0.25s ease;
+}
+
 .champ-info {
     display: flex;
     flex-direction: column;
@@ -398,6 +427,10 @@ label,
     padding: 1rem 0;
 }
 
+.staff-grid h2 {
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
 .staff-grid .team-card {
     background: #1a1f27;
     height: 300px;
@@ -417,13 +450,11 @@ label,
 }
 
 .staff-grid .team-card[data-url]:hover {
-    background: #232c3a;
-    /* gentle bluish tint */
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 4px 14px rgba(114, 137, 218, 0.25);
-    /* softer glow */
-    border-color: rgba(114, 137, 218, 0.4);
-    /* light blue outline */
+    transform: translateY(-6px);
+    background: #1f2533;
+    box-shadow: 0 12px 24px rgba(114, 137, 218, 0.15);
+    border-color: rgba(114, 137, 218, 0.3);
+
 }
 
 /* Text soft glow */
@@ -455,8 +486,9 @@ footer {
     text-align: center;
     padding: 2.5rem 1rem;
     margin-top: 3rem;
-    border-top: 1px solid #2d3748;
     font-size: 1.05rem;
+    border-top: 1px solid rgba(114, 137, 218, 0.3);
+    box-shadow: 0 -4px 20px rgba(114, 137, 218, 0.05);
 }
 
 .footer-content p {
@@ -506,10 +538,14 @@ footer {
         /* fixed enough for flip, not too tall */
     }
 
+    .team-card:active {
+        transform: scale(0.98);
+        filter: brightness(0.9);
+    }
+
     .card-content {
-        height: 100%;
-        transform-style: preserve-3d;
-        transition: transform 0.8s ease-in-out;
+        transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+        /* easeInOutQuart style */
     }
 
     /* ✅ Keep the flip rotation */
@@ -574,5 +610,11 @@ footer {
         width: 45%;
         max-width: 140px;
         text-align: center;
+    }
+
+    .flip-btn:active,
+    .opgg-btn:active,
+    .return-btn:active {
+        transform: scale(0.95);
     }
 }

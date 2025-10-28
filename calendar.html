@@ -28,6 +28,10 @@
             z-index: 100;
         }
 
+        .navbar.scrolled {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
         .nav-logo img {
             height: 60px;
 
@@ -347,8 +351,10 @@
         src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQTfM-wph-NUCiw93LdC2M19Ab467pQlIaykhQwfjF-CgVq0-iqADD_rJuPAys6d6FlT_rWpR55zO9T/pubhtml?widget=true&amp;chrome=false&amp;headers=false"></iframe>
 
 
-
+    <script>window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.navbar');
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+        });</script>
 </body>
 
 </html>
-

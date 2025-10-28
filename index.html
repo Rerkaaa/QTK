@@ -223,18 +223,20 @@
                 </div>
         </section>
     </main>
-<footer>
-    <div class="footer-content">
-        <p>&copy; 2025 QTK. Powered by cuties.</p>
-        <div class="footer-contacts">
-            <p>
-                <strong>Contacts:</strong>
-                <a href="https://discordapp.com/users/292705392868196356" target="_blank" rel="noopener noreferrer">Messefy (Captain)</a> •
-                <a href="https://discordapp.com/users/482171647239913486" target="_blank" rel="noopener noreferrer">rerkaaa (Web Developer)</a>
-            </p>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 QTK. Powered by cuties.</p>
+            <div class="footer-contacts">
+                <p>
+                    <strong>Contacts:</strong>
+                    <a href="https://discordapp.com/users/292705392868196356" target="_blank"
+                        rel="noopener noreferrer">Messefy (Captain)</a> •
+                    <a href="https://discordapp.com/users/482171647239913486" target="_blank"
+                        rel="noopener noreferrer">rerkaaa (Web Developer)</a>
+                </p>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const teamCards = document.querySelectorAll('.team-card');
@@ -302,7 +304,10 @@
                 alert("Failed to load player stats — check console for details.");
             });
     </script>
-
+    <script>window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.navbar');
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+        });</script>
 
 </body>
 
