@@ -409,6 +409,28 @@ label,
     transform: translateY(-5px);
 }
 
+/* ===== SOFTER CLICKABLE STAFF CARD HOVER ===== */
+.staff-grid .team-card[data-url] {
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.staff-grid .team-card[data-url]:hover {
+    background: #232c3a; /* gentle bluish tint */
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 4px 14px rgba(114, 137, 218, 0.25); /* softer glow */
+    border-color: rgba(114, 137, 218, 0.4); /* light blue outline */
+}
+
+/* Text soft glow */
+.staff-grid .team-card[data-url]:hover h3,
+.staff-grid .team-card[data-url]:hover h5 {
+    color: #b8d8ff;
+    transition: color 0.3s ease;
+}
+
+
 /* ========== TEAM OPGG BUTTON ========== */
 .team-grid .team-opgg {
     color: #00e0d0;
