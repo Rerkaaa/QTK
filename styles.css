@@ -1,0 +1,455 @@
+/* ========== RESET & BASE ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0f1419;
+    color: #c7d1db;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    background: #1a1f27;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1700px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-logo img {
+    height: 60px;
+    border-radius: 50%;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    font-weight: bold;
+    color: #c7d1db;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #7289da;
+}
+
+/* ========== CONTAINER ========== */
+.container {
+    align-items: center;
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #2d3748;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: #7289da;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* ========== TEAM GRID ========== */
+.team-grid h2,
+.staff-grid h2 {
+    text-align: center;
+    margin: 2rem 0 1rem;
+    font-size: 2rem;
+    color: #7289da;
+}
+
+.team-grid h3 {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.4rem;
+    color: #a9d7ff;
+}
+
+.team-grid .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    overflow: hidden;
+}
+
+/* ========== TEAM CARD ========== */
+.team-card {
+    background: #0f1419;
+    text-align: center;
+    width: 300px;
+    height: 700px;
+    perspective: 1200px;
+    position: relative;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+/* ========== FLIP SETUP ========== */
+
+/* ====== FLIP CARD (FINAL FIXED VERSION) ====== */
+.team-card {
+    perspective: 1200px;
+    position: relative;
+    width: 300px;
+    height: 700px;
+    border-radius: 8px;
+    background: transparent;
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-card input.flip-toggle {
+    display: none;
+}
+
+.card-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-in-out;
+}
+
+.team-card input.flip-toggle:checked~.card-content {
+    transform: rotateY(180deg);
+}
+
+/* FRONT FACE */
+.front {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #11161b;
+    color: #c7d1db;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    transform: rotateY(0deg);
+}
+
+/* BACK FACE */
+.back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #11161b;
+    color: #c7d1db;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* top start, we’ll use spacing below */
+    padding: 1.5rem 1rem;
+    transform: rotateY(180deg);
+    overflow: hidden;
+    /* no scrollbar */
+    position: relative;
+}
+
+/* Remove all old flip fixes */
+.back * {
+    transform: none !important;
+}
+
+
+
+/* ========== BUTTONS ========== */
+.flip-btn,
+.return-btn,
+.opgg-btn {
+    margin-top: 0.6rem;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    border: 2px solid #7289da;
+    color: #7289da;
+    background: transparent;
+    font-weight: bold;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.flip-btn:hover,
+.return-btn:hover,
+.opgg-btn:hover {
+    background-color: #7289da;
+    color: #0f1419;
+}
+
+a,
+button,
+label,
+.opgg-btn,
+.flip-btn,
+.return-btn {
+    cursor: pointer;
+}
+
+/* ========== BACK FACE LAYOUT ========== */
+
+
+.back .champions h4 {
+    color: #7289da;
+    margin-bottom: 0.5rem;
+}
+
+.back .champ-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 6px;
+}
+
+
+.back .actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-bottom: 0.25rem;
+}
+
+.back .actions .button {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.back .opgg-btn,
+.back .return-btn {
+    position: absolute;
+    width: 80%;
+    transform: translateX(-50%);
+    text-align: center;
+    
+}
+
+.back .opgg-btn {
+    bottom: 4rem;
+}
+
+.back .return-btn {
+    bottom: 1rem;
+}
+
+/* Button hover + pointer consistency */
+a,
+button,
+label,
+.opgg-btn,
+.flip-btn,
+.return-btn {
+    cursor: pointer;
+}
+
+/* ========== RANK COLORS ========== */
+.rank {
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin-top: 4px;
+}
+
+.tier-challenger {
+    color: #ffba00;
+}
+
+.tier-grandmaster {
+    color: #ff4b4b;
+}
+
+.tier-master {
+    color: #b86aff;
+}
+
+.tier-diamond {
+    color: #59caff;
+}
+
+.tier-emerald {
+    color: #4aff9b;
+}
+
+.tier-platinum {
+    color: #00e0d0;
+}
+
+.tier-gold {
+    color: #ffcc66;
+}
+
+.tier-silver {
+    color: #bfbfbf;
+}
+
+.tier-bronze {
+    color: #b26b3f;
+}
+
+.tier-iron {
+    color: #888;
+}
+
+/* ========== CHAMPIONS ========== */
+.champions h4 {
+    text-align: center;
+    color: #7289da;
+    margin-bottom: 0.5rem;
+}
+
+.champ-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+    width: 100%;
+}
+
+.champ-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.champ-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.champ-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.champ-name {
+    font-weight: 600;
+    color: #fff;
+}
+
+.champ-stats {
+    font-size: 0.85em;
+    color: #ccc;
+}
+
+/* ========== STAFF ========== */
+.staff-grid .grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+}
+
+.staff-grid .team-card {
+    background: #1a1f27;
+    height: 300px;
+    transition: transform 0.3s ease;
+    align-content: center;
+}
+
+.staff-grid .team-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ========== TEAM OPGG BUTTON ========== */
+.team-grid .team-opgg {
+    color: #00e0d0;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    font-weight: bold;
+}
+
+.team-grid .team-opgg:hover {
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+/* ========== FOOTER ========== */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: #1a1f27;
+    margin-top: 3rem;
+    border-top: 1px solid #2d3748;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .team-card {
+        width: 240px;
+        height: 420px;
+    }
+
+    .front img.profile-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .champ-item img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .champ-stats {
+        font-size: 0.8em;
+    }
+}
