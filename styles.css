@@ -13,6 +13,7 @@ body {
     overflow-x: hidden;
 }
 
+
 /* ========== NAVBAR ========== */
 .navbar {
     background: #1a1f27;
@@ -70,6 +71,8 @@ body {
     text-align: center;
     padding: 1rem 0;
     border-bottom: 1px solid #2d3748;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero h1 {
@@ -77,6 +80,7 @@ body {
     color: #7289da;
     animation: glowPulse 3s ease-in-out infinite;
 }
+
 
 @keyframes glowPulse {
 
@@ -236,7 +240,9 @@ body {
     color: #7289da;
     background: transparent;
     font-weight: bold;
-    transition: 0.3s;
+    transform: scale(0.96);
+    box-shadow: 0 0 8px rgba(114, 137, 218, 0.3);
+    transition: transform 0.3s ease;
     text-decoration: none;
 }
 
@@ -325,44 +331,67 @@ label,
     margin-top: 4px;
 }
 
+
 .tier-challenger {
     color: #ffba00;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-grandmaster {
     color: #ff4b4b;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-master {
     color: #b86aff;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-diamond {
     color: #59caff;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-emerald {
     color: #4aff9b;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-platinum {
     color: #00e0d0;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-gold {
     color: #ffcc66;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-silver {
     color: #bfbfbf;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-bronze {
     color: #b26b3f;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .tier-iron {
     color: #888;
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        text-shadow: 0 0 6px rgba(89, 202, 255, 0.3);
+    }
+
+    50% {
+        text-shadow: 0 0 12px rgba(89, 202, 255, 0.8);
+    }
 }
 
 /* ========== CHAMPIONS ========== */
@@ -489,6 +518,14 @@ footer {
     font-size: 1.05rem;
     border-top: 1px solid rgba(114, 137, 218, 0.3);
     box-shadow: 0 -4px 20px rgba(114, 137, 218, 0.05);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+footer.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .footer-content p {
@@ -544,13 +581,11 @@ footer {
     }
 
     .card-content {
-        transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
-        /* easeInOutQuart style */
+        transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1), filter 0.3s;
     }
 
-    /* ✅ Keep the flip rotation */
     .team-card input.flip-toggle:checked~.card-content {
-        transform: rotateY(180deg);
+        filter: blur(1px) brightness(0.95);
     }
 
     .front,

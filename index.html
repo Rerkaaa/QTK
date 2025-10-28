@@ -304,9 +304,16 @@
                 alert("Failed to load player stats — check console for details.");
             });
     </script>
+
     <script>window.addEventListener('scroll', () => {
             const nav = document.querySelector('.navbar');
             nav.classList.toggle('scrolled', window.scrollY > 20);
+        });</script>
+
+    <script>window.addEventListener('scroll', () => {
+            const footer = document.querySelector('footer');
+            const rect = footer.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 100) footer.classList.add('visible');
         });</script>
 
 </body>
