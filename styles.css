@@ -445,13 +445,33 @@ label,
 }
 
 /* ========== FOOTER ========== */
+/* ===== ENHANCED FOOTER ===== */
 footer {
-    text-align: center;
-    padding: 2rem;
     background: #1a1f27;
+    color: #c7d1db;
+    text-align: center;
+    padding: 2.5rem 1rem;
     margin-top: 3rem;
     border-top: 1px solid #2d3748;
+    font-size: 1.05rem;
 }
+
+.footer-content p {
+    margin: 0.5rem 0;
+}
+
+.footer-contacts a {
+    color: #7289da;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer-contacts a:hover {
+    color: #a9d7ff;
+    text-shadow: 0 0 6px rgba(114, 137, 218, 0.5);
+}
+
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
