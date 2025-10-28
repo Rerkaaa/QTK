@@ -557,6 +557,10 @@ footer {
     .back .actions {
         position: absolute;
         bottom: 1rem;
+        left: 50%;
+        /* center reference point */
+        transform: translateX(-50%);
+        /* shift perfectly centered */
         width: 100%;
         display: flex;
         justify-content: center;
@@ -567,5 +571,7 @@ footer {
     .back .opgg-btn,
     .back .return-btn {
         width: auto;
+        min-width: 100px;
+        text-align: center;
     }
 }
