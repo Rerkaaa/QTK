@@ -54,8 +54,8 @@
                                 </div>
 
                                 <div class="actions">
-                                    <a href="https://op.gg/lol/summoners/euw/Robb%20Stark-444"
-                                        target="_blank" class="button opgg-btn">OP.GG</a>
+                                    <a href="https://op.gg/lol/summoners/euw/Robb%20Stark-444" target="_blank"
+                                        class="button opgg-btn">OP.GG</a>
                                     <label for="player1" class="button return-btn">Back</label>
                                 </div>
                             </div>
@@ -89,8 +89,8 @@
                                 </div>
 
                                 <div class="actions">
-                                    <a href="https://op.gg/lol/summoners/euw/2018%20Ame-PSG"
-                                        target="_blank" class="button opgg-btn">OP.GG</a>
+                                    <a href="https://op.gg/lol/summoners/euw/2018%20Ame-PSG" target="_blank"
+                                        class="button opgg-btn">OP.GG</a>
                                     <label for="player2" class="button return-btn">Back</label>
                                 </div>
                             </div>
@@ -124,8 +124,8 @@
                                 </div>
 
                                 <div class="actions">
-                                    <a href="https://op.gg/lol/summoners/euw/TwInkMage-QTK"
-                                        target="_blank" class="button opgg-btn">OP.GG</a>
+                                    <a href="https://op.gg/lol/summoners/euw/TwInkMage-QTK" target="_blank"
+                                        class="button opgg-btn">OP.GG</a>
                                     <label for="player3" class="button return-btn">Back</label>
                                 </div>
                             </div>
@@ -159,8 +159,8 @@
                                 </div>
 
                                 <div class="actions">
-                                    <a href="https://op.gg/lol/summoners/euw/messefy-6969"
-                                        target="_blank" class="button opgg-btn">OP.GG</a>
+                                    <a href="https://op.gg/lol/summoners/euw/messefy-6969" target="_blank"
+                                        class="button opgg-btn">OP.GG</a>
                                     <label for="player4" class="button return-btn">Back</label>
                                 </div>
                             </div>
@@ -275,13 +275,17 @@
                         .slice(0, 5)
                         .map(champ => `
             <div class="champ-item">
-              <img src="https://ddragon.leagueoflegends.com/cdn/14.20.1/img/champion/${champ.name}.png" alt="${champ.name}">
-              <div class="champ-info">
+                <img src="https://ddragon.leagueoflegends.com/cdn/14.20.1/img/champion/${champ.name}.png" alt="${champ.name}">
+                <div class="champ-info">
                 <span class="champ-name">${champ.name}</span>
-                <span class="champ-stats">${champ.wins}W / ${champ.losses}L • ${(champ.winrate * 100).toFixed(1)}% WR • ${champ.kda.toFixed(2)} KDA</span>
-              </div>
+                <span class="champ-stats">
+                    ${champ.wins}W / ${champ.losses}L • 
+                    ${((champ.winrate * 100) % 1 === 0 ? (champ.winrate * 100).toFixed(0) : (champ.winrate * 100).toFixed(1))}% WR • 
+                    ${champ.kda.toFixed(2)} KDA
+                </span>
+                </div>
             </div>
-          `)
+            `)
                         .join("");
                 });
             })
