@@ -647,25 +647,25 @@ footer.visible {
     }
 }
 
-/* ===== MOBILE + RESPONSIVE FLIP FIX (WITH FLIP ANIMATION KEPT) ===== */
+/* ===== MOBILE + RESPONSIVE FLIP FIX (REAL 3D PRESERVED) ===== */
 @media (max-width: 768px) {
     .team-card {
         width: 90%;
-        height: 500px;
-        /* fixed enough for flip, not too tall */
-    }
-
-    .team-card:active {
-        transform: scale(0.98);
-        filter: brightness(0.9);
+        height: 480px;
+        perspective: 1000px;
+        /* ensure 3D flip works on mobile */
     }
 
     .card-content {
-        transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1), filter 0.3s;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+        position: relative;
     }
 
     .team-card input.flip-toggle:checked~.card-content {
-        filter: blur(1px) brightness(0.95);
+        transform: rotateY(180deg);
         z-index: 10;
     }
 
@@ -677,8 +677,9 @@ footer.visible {
         height: 100%;
         border-radius: 8px;
         backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        /* Safari fix */
         overflow: hidden;
-        padding: 1rem;
     }
 
     .front {
@@ -687,27 +688,24 @@ footer.visible {
     }
 
     .back {
-        position: relative;
+        background-color: #1e2e3d;
+        transform: rotateY(180deg);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+        padding: 1.5rem 1rem 4rem;
         overflow-y: auto;
-        padding-bottom: 4rem;
-        /* space for buttons */
     }
 
-    /* Adjust content inside for smaller screens */
-    .front img.profile-img {
-        width: 110px;
-        height: 110px;
-    }
-
+    /* Champion grid scroll area */
     .back .champ-grid {
         max-height: 180px;
         overflow-y: auto;
+        scrollbar-width: thin;
     }
 
+    /* Center the action buttons */
     .back .actions {
         position: absolute;
         bottom: 1rem;
@@ -715,7 +713,6 @@ footer.visible {
         transform: translateX(-50%);
         display: flex;
         justify-content: center;
-        align-items: center;
         flex-wrap: wrap;
         gap: 0.75rem;
         width: 100%;
