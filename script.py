@@ -280,6 +280,16 @@ def countdown(seconds):
         seconds -= 1
     print("Proceeding!")
 
+# Fetch matches for all players with rate limiting
+df_matches = {}
+df_matches['gingii'] = fetch_last_matches(puuid=players['gingii'], region='europe', queue=420)
+df_matches['moldrn'] = fetch_last_matches(puuid=players['moldrn'], region='europe', queue=420)
+countdown(60)
+df_matches['frozen'] = fetch_last_matches(puuid=players['frozen'], region='europe', queue=420)
+df_matches['messefy'] = fetch_last_matches(puuid=players['messefy'], region='europe', queue=420)
+countdown(60)
+df_matches['vaxerdj'] = fetch_last_matches(puuid=players['vaxerdj'], region='europe', queue=420)
+
 def load_lol_data():
     """
     Loads League of Legends data from CommunityDragon resources, including JSON data and dictionaries for perks, items, champions, etc.
@@ -448,6 +458,13 @@ def load_lol_data():
         'list_dir_files': list_dir_files  # Include the helper function if needed
     }
 
+lol_data = load_lol_data()
+perk_dict = lol_data['perk_dict']
+perk_styles_dict = lol_data['perk_styles_dict']
+item_dict = lol_data['item_dict']
+champ_dict = lol_data['champ_dict']
+summoner_dict = lol_data['summoner_dict']
+
 # Expanded list of all numerical/stat columns to protect/reverse (add any others from your df if missing)
 protected_cols = [
     'game_creation', 'game_duration', 'game_start_timestamp', 'game_end_timestamp',
@@ -497,6 +514,18 @@ def apply_replacements(df, perk_dict, perk_styles_dict, item_dict, champ_dict, s
 
     return df
 
+# Apply replacements to all match dataframes
+for player in df_matches:
+    df_matches[player] = apply_replacements(
+        df_matches[player], perk_dict, perk_styles_dict, item_dict, champ_dict, summoner_dict, protected_cols
+    )
+
+# Upload match data to sheets (sheets 0-4 for gingii, moldrn, frozen, messefy, vaxerdj)
+player_order = ['gingii', 'moldrn', 'frozen', 'messefy', 'vaxerdj']
+for i, player in enumerate(player_order):
+    wks = sheet[i]
+    wks.set_dataframe(df_matches[player], start='A1', copy_head=True, fit=True)
+
 def process_rank(rank_json):
     data = []
     for entry in rank_json:
@@ -512,44 +541,13 @@ def process_rank(rank_json):
         })
     return pd.DataFrame(data)
 
-def run_data_fetch_and_upload():
-    # Load LoL data
-    lol_data = load_lol_data()
-    perk_dict = lol_data['perk_dict']
-    perk_styles_dict = lol_data['perk_styles_dict']
-    item_dict = lol_data['item_dict']
-    champ_dict = lol_data['champ_dict']
-    summoner_dict = lol_data['summoner_dict']
+# Fetch and process ranks
+df_ranks = {}
+for player, puuid in players.items():
+    rank_json = get_rank(puuid)
+    df_ranks[player] = process_rank(rank_json)
 
-    # Fetch matches for all players with rate limiting
-    df_matches = {}
-    df_matches['gingii'] = fetch_last_matches(puuid=players['gingii'], region='europe', queue=420)
-    df_matches['moldrn'] = fetch_last_matches(puuid=players['moldrn'], region='europe', queue=420)
-    countdown(60)
-    df_matches['frozen'] = fetch_last_matches(puuid=players['frozen'], region='europe', queue=420)
-    df_matches['messefy'] = fetch_last_matches(puuid=players['messefy'], region='europe', queue=420)
-    countdown(60)
-    df_matches['vaxerdj'] = fetch_last_matches(puuid=players['vaxerdj'], region='europe', queue=420)
-
-    # Apply replacements to all match dataframes
-    for player in df_matches:
-        df_matches[player] = apply_replacements(
-            df_matches[player], perk_dict, perk_styles_dict, item_dict, champ_dict, summoner_dict, protected_cols
-        )
-
-    # Upload match data to sheets (sheets 0-4 for gingii, moldrn, frozen, messefy, vaxerdj)
-    player_order = ['gingii', 'moldrn', 'frozen', 'messefy', 'vaxerdj']
-    for i, player in enumerate(player_order):
-        wks = sheet[i]
-        wks.set_dataframe(df_matches[player], start='A1', copy_head=True, fit=True)
-
-    # Fetch and process ranks
-    df_ranks = {}
-    for player, puuid in players.items():
-        rank_json = get_rank(puuid)
-        df_ranks[player] = process_rank(rank_json)
-
-    # Upload rank data to sheets (sheets 5-9 for gingii, moldrn, frozen, messefy, vaxerdj)
-    for i, player in enumerate(player_order):
-        wks = sheet[i + 5]
-        wks.set_dataframe(df_ranks[player], start='A1', copy_index=False, copy_head=True)
+# Upload rank data to sheets (sheets 5-9 for gingii, moldrn, frozen, messefy, vaxerdj)
+for i, player in enumerate(player_order):
+    wks = sheet[i + 5]
+    wks.set_dataframe(df_ranks[player], start='A1', copy_index=False, copy_head=True)
