@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QTK</title>
-    <link rel="icon" type="image/png"
-        href="img/logo.png">
+    <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo"><img
-                    src="img/logo.png"
-                    alt="QTK Logo"></a>
+            <a href="index.html" class="nav-logo"><img src="img/logo.png" alt="QTK Logo"></a>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="calendar.html">Calendar</a></li>
@@ -263,22 +260,29 @@
                     const card = document.querySelector(`.team-card[data-player="${player.name}"]`);
                     if (!card) return;
 
-                    // --- FRONT SIDE: Tier + LP + color ---
                     const rankElem = card.querySelector(".rank");
-                    rankElem.textContent = `${player.tier} ${player.rank} (${player.lp} LP)`;
-
-                    // apply tier-based color dynamically
                     const tier = player.tier.toLowerCase();
-                    rankElem.className = `rank tier-${tier}`; // e.g. "rank tier-master"
 
-                    // --- BACK SIDE: Winrate + KDA ---
+                    const emblemUrl = `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/ranked-emblem/emblem-${tier}.png`;
+
+                    rankElem.innerHTML = `
+                        <img src="${emblemUrl}" alt="${player.tier} Emblem" class="rank-emblem">
+                        ${player.tier} ${player.rank} (${player.lp} LP)
+                    `;
+
+                    rankElem.className = `rank tier-${tier}`;
+
+                    rankElem.innerHTML = `
+                        <img src="${emblemUrl}" alt="${player.tier} Emblem" class="rank-emblem">
+                        <span>${player.tier} ${player.rank} (${player.lp} LP)</span>
+                    `;
+
                     const winrateElem = card.querySelector(".winrate");
                     const kdaElem = card.querySelector(".kda");
 
                     winrateElem.textContent = (player.overview.winrate * 100).toFixed(1) + "%";
                     kdaElem.textContent = player.overview.kda.toFixed(2);
 
-                    // --- CHAMPIONS: Top 3 only ---
                     const champGrid = card.querySelector(".champ-grid");
                     champGrid.innerHTML = player.champions
                         .sort((a, b) => b.winrate - a.winrate)
