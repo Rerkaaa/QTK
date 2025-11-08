@@ -25,6 +25,11 @@
         <section class="team-grid">
             <h3><a href="https://op.gg/lol/multisearch/euw?summoners=Robb+Stark%23444%2C2018+Ame%23PSG%2CTwInkMage%23QTK%2Cmessefy%236969%2CI+love+Alt+girls%23Love"
                     class="team-opgg" target="_blank" rel="noopener noreferrer"> Team OPGG</a></h3>
+            <div class="refresh-container">
+                <button id="refresh-btn" class="refresh-btn">Refresh Data</button>
+                <span id="refresh-status" class="refresh-status"></span>
+            </div>
+
             <div class="grid">
                 <!-- Gingii -->
                 <div class="team-card" data-player="Gingii">
@@ -289,7 +294,7 @@
                         .slice(0, 5)
                         .map(champ => `
             <div class="champ-item">
-                <img src="https://ddragon.leagueoflegends.com/cdn/14.20.1/img/champion/${champ.name}.png" alt="${champ.name}">
+                <img src="https://ddragon.leagueoflegends.com/cdn/15.22.1/img/champion/${champ.name}.png" alt="${champ.name}">
                 <div class="champ-info">
                 <span class="champ-name">${champ.name}</span>
                 <span class="champ-stats">
@@ -308,6 +313,8 @@
                 alert("Failed to load player stats — check console for details.");
             });
     </script>
+
+
 
     <script>window.addEventListener('scroll', () => {
             const nav = document.querySelector('.navbar');
